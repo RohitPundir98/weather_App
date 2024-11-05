@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCloud,
   faSun,
-  faCloudSun,
   faCloudShowersHeavy,
   faWind,
 } from "@fortawesome/free-solid-svg-icons";
@@ -40,23 +39,28 @@ function WeatherDisplay({ weatherData, isLoading }) {
   const weatherIcon = weatherIcons[weatherCondition] || faCloud;
 
   return (
-    <div className="mt-6 text-center">
-      <h2 className="text-2xl font-bold">
+    <div className="mt-6 text-center dark:bg-gray-600 shadow-md rounded-lg p-9 py-16 max-w-md mb-[125px] mx-auto">
+      <h2 className="text-2xl font-bold text-white-300 mb-2">
         {weatherData.name}, {weatherData.sys.country}
       </h2>
-      <p className="text-xl flex items-center justify-center">
-        <FontAwesomeIcon icon={weatherIcon} className="mr-2" />
+      <div className="text-5xl font-semibold text-white-400 flex items-center justify-center mb-2">
+        <FontAwesomeIcon icon={weatherIcon} className="mr-3" />
         {weatherData.main.temp}°C
+      </div>
+      <p className="text-lg text-white-700 capitalize mb-4">
+        {weatherData.weather[0].description}
       </p>
-      <p className="flex items-center justify-center">
-        <FontAwesomeIcon icon={faWind} className="mr-2" />
-        Wind Speed: {weatherData.wind.speed} m/s
-      </p>
-      <p className="flex items-center justify-center">
-        <FontAwesomeIcon icon={faCloud} className="mr-2" />
-        Humidity: {weatherData.main.humidity}%
-      </p>
-      <p className="text-md">{weatherData.weather[0].description}</p>
+
+      <div className="flex justify-between text-white-600 text-sm mt-4 border-t pt-4">
+        <div className="flex items-center">
+          <FontAwesomeIcon icon={faWind} className="mr-1" />
+          <p>Wind: {weatherData.wind.speed} m/s</p>
+        </div>
+        <div className="flex items-center">
+          <FontAwesomeIcon icon={faCloud} className="mr-1" />
+          <p>Humidity: {weatherData.main.humidity}%</p>
+        </div>
+      </div>
     </div>
   );
 }
